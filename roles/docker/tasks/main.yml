@@ -1,0 +1,4 @@
+---
+- name: instala o docker
+  include: dockerinstala.yml
+

@@ -1,0 +1,39 @@
+---
+- name: criando volume para os containers
+  docker_volume:
+   name: index
+
+- name: criando o container 1
+  docker_container:
+    name: index1
+    image: httpd
+    state: started
+    volumes:
+     - index:/usr/local/apache2/htdocs
+    ports:
+      8083:80
+
+- name: criando o container 2
+  docker_container:
+    name: index2
+    image: httpd 
+    state: started
+    volumes:
+     - index:/usr/local/apache2/htdocs
+    ports:
+      8084:80
+#    command: ["/bin/bash","service apache2 start"]
+
+- name: copiando o arquivo
+  file: 
+    path: /var/lib/docker/volumes/index/_data/index.html
+    state: touch 
+
+- name: colocando conteudo no arquivo
+  blockinfile: 
+   path: /var/lib/docker/volumes/index/_data/index.html
+   marker: ""
+   block: |
+    criei uma index com ansible
+
+

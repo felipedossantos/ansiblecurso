@@ -1,0 +1,5 @@
+---
+- name: playbook para instalar 2  docker
+  hosts: docker
+  roles:
+   - docker2 

@@ -1,0 +1,29 @@
+---
+- name: instalar pacotes docker
+  apt:
+   name: "{{ item }}"
+   state: present
+   update_cache: yes
+  with_items:
+   - apt-transport-https
+   - ca-certificates
+   - curl
+   - software-properties-common
+
+#- name: chamada do curl
+#  shell: 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -'
+
+- name: adiciona chave gpg do docker
+  apt_key:
+   url: http://download.docker.com/linux/ubuntu/gpg
+ 
+- name: adiciona o repositorio do docker
+  apt_repository:
+   repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+   state: present
+
+- name: instalando puppet agent
+  apt:
+    name: docker-ce
+    update_cache: yes
+    state: present

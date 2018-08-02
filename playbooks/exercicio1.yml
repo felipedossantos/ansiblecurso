@@ -1,0 +1,6 @@
+---
+- name: meu playbook
+  hosts: all
+  roles:
+   - apache
+   - pacotes
